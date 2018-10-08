@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-12 name">
+                    <h1>Help Rick Save The Day!!!!</h1>
+                </div>
+
+            </div>
+            <!--row-->
+        </div>
+        <!--container-->
+    </header>
+
+    <br>
+    <br>
+
+
+    <div class="container about">
+
+        <div class="row">
+            <div class="col-6 instructions">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Morty!!!! I Need Your Help Morty!!</div>
+                    <div class="card-body">
+                        <p class="card-text">Help Rick Create A New Element</p>
+
+                        <p class="card-text">There are four items below. By clicking on an item you will
+                            add a specific amount of points to your total score.</p>
+
+                        <p class="card-text">You win the game by matching your total score to random number,
+                            you lose the game if your total score goes above the random number</p>
+
+                        <p class="card-text">The value of each item is hidden from you until you click on
+                            it.</p>
+
+                        <p class="card-text">Each time the game starts, the value of each of the crystals will
+                            change.</p>
+
+                        <h5 class="card-title">Wubba Lubba Dub Dub!!!!</h5>
+                    </div>
+                </div>
+            </div>
+            <!--End of column-->
+            <div id="image" class="col-5">
+                <div class="card bg-dark text-white rick_image">
+                    <img class="card-img" src="assets\images\Rick_Morty.jpeg.JPG" alt="Rick and Morty" height="500">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Quick Morty!!</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--row-->
+        <div class="row">
+            <div class="col-4 targetnumber">
+                <div class="card text-white bg-info mb-3 fields">
+                    <div class="card-header">Target Number</div>
+                    <div class="card-body">
+                        <p id="targetNumber" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            <!--End of targetNumber-->
+            <div class="col-4 wincounter">
+                <div class="card text-white bg-info mb-3 fields">
+                    <div class="card-header">Wins:</div>
+                    <div class="card-body">
+                        <p id="userWins" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 losscounter">
+                <div class="card text-white bg-info mb-3 fields">
+                    <div class="card-header">Losses:</div>
+                    <div class="card-body">
+                        <p id="userLosses" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of row 2-->
+        <div class="row">
+            <div class="col-2">
+                <button>
+                    <div class="card bg-dark text-white crytal">
+                        <img class="card-img" src="assets\images\plumbus.jpeg" alt="A Plumbus height=" 149>
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">A Plumbus</h5>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-2">
+                <button>
+                    <div class="card bg-dark text-white crytal">
+                        <img class="card-img" src="assets\images\Szechuan.jpg" alt="Szechuan Sauce" height="141" width="200">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">Szechuan Sauce</h5>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-2">
+                <button>
+                    <div class="card bg-dark text-white crytal">
+                        <img class="card-img" src="assets\images\meeseeks.jpg" alt="Meeseeks Box" height="141" width="200">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">Meeseeks Box</h5>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="col-2">
+                <button>
+                    <div class="card bg-dark text-white crytal">
+                        <img class="card-img" src="assets\images\portal.jpg" alt="Portal" height="141" width="200">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">A Portal</h5>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <!--End of Row 3-->
+        <div class="row">
+            <div class="col-4 scorecounter">
+                <div class="card text-white bg-info mb-3 fields">
+                    <div class="card-header">Your Number</div>
+                    <div class="card-body">
+                        <p id="userNumber" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of Row 4-->
+
+
+    </div>
+    <!--container-->
+
+
+
+    <footer>
+
+        <p align="center">Copyright</p>
+
+    </footer>
+
+    // Game with Four Crystals
+
+    //Every Crystal needs to have a random number 1-12
+
+    //Number should generate every time a user wins or loses
+
+    //When clicking any crystal the crystal value should be added to the previous total until it hits the targetNumber
+
+    //If it is higher than targetNumber then we start over and increment a loss
+
+    //if it is equal then we increment the win counter
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var game = {
+                gameState: 0,
+                wins: 0,
+                losses: 0,
+                targetNumber: 0,
+                userNumber: [],
+                userLose: false,
+                userWin: false
+            }
+
+// attmpt to push values into an array userNumber, use a parseint to convert to values and add them, display this number into YourNumber. Utilize a for loop to continue to add the new value to the old value
+
+            function initilaizeGame() {
+                crystals = {
+                    crystal1: Math.floor((Math.random() * 9) + 1),
+                    crystal2: Math.floor((Math.random() * 9) + 1),
+                    crytsal3: Math.floor((Math.random() * 9) + 1),
+                    crytsal4: Math.floor((Math.random() * 9) + 1),
+                    targetNumber: Math.floor((Math.random() * 100) + 40),
+                }
+                
+                userNumber 
+
+            }
+            function populate (arr) {
+                $("#targetNumber").text(crystals.targetNumber);
+                $("#userWins").text(game.wins);
+                $("#userLosses").text(game.losses);
+            }
+            initilaizeGame();
+            populate();
+
+            $(".card").on("click", function () {
+                if (userNumber === targetNumber) {
+                    alert("You Win!");
+                    wins++;
+                    initilaizeGame();    
+                }
+                else if (userNumber > targetNumber) {
+                    alert("You Lose");
+                    losses++;
+                    initilaizeGame();
+                }
+                else {
+
+                }
+
+
+
+            });
+
+
+
+
+        });
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
