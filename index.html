@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
@@ -100,9 +100,9 @@
         <!--End of row 2-->
         <div class="row">
             <div class="col-2">
-                <button>
-                    <div class="card bg-dark text-white crytal">
-                        <img class="card-img" src="assets\images\plumbus.jpeg" alt="A Plumbus height=" 149>
+                <button id="crystal1" class="crystal">
+                    <div class="card bg-dark text-white">
+                        <img class="card-img" src="assets\images\plumbus.jpeg" alt="A Plumbus" height="141">
                         <div class="card-img-overlay">
                             <h5 class="card-title">A Plumbus</h5>
                         </div>
@@ -110,8 +110,8 @@
                 </button>
             </div>
             <div class="col-2">
-                <button>
-                    <div class="card bg-dark text-white crytal">
+                <button id="crystal2" class="crystal">
+                    <div class="card bg-dark text-white">
                         <img class="card-img" src="assets\images\Szechuan.jpg" alt="Szechuan Sauce" height="141" width="200">
                         <div class="card-img-overlay">
                             <h5 class="card-title">Szechuan Sauce</h5>
@@ -120,8 +120,8 @@
                 </button>
             </div>
             <div class="col-2">
-                <button>
-                    <div class="card bg-dark text-white crytal">
+                <button id="crystal3" class="crystal">
+                    <div class="card bg-dark text-white">
                         <img class="card-img" src="assets\images\meeseeks.jpg" alt="Meeseeks Box" height="141" width="200">
                         <div class="card-img-overlay">
                             <h5 class="card-title">Meeseeks Box</h5>
@@ -130,8 +130,8 @@
                 </button>
             </div>
             <div class="col-2">
-                <button>
-                    <div class="card bg-dark text-white crytal">
+                <button id="crystal4" class="crystal">
+                    <div class="card bg-dark text-white">
                         <img class="card-img" src="assets\images\portal.jpg" alt="Portal" height="141" width="200">
                         <div class="card-img-overlay">
                             <h5 class="card-title">A Portal</h5>
@@ -165,9 +165,9 @@
 
     </footer>
 
-    // Game with Four Crystals
+   
 
-    //Every Crystal needs to have a random number 1-12
+    
 
     //Number should generate every time a user wins or loses
 
@@ -180,72 +180,60 @@
 
 
     <script type="text/javascript">
+ // Game with Four Crystals
+ $(document).ready(function () {
+            var wins = 0;
+            var losses = 0;
+            var userNumber = 0;
+            var targetNumber = Math.floor(Math.random() * 80) + 20; 
+            console.log(targetNumber);
+//A function that will be used to start the game over, as well as contain the entire game within it
+            function resetGame() {
+                userNumber = 0;
+                targetNumber = Math.floor(Math.random() * 80) + 20;
+//Every Crystal needs to have a random number 1-12
+                crystal1 = Math.floor((Math.random() * 9) + 1);
+                crystal2 = Math.floor((Math.random() * 9) + 1);
+                crystal3 = Math.floor((Math.random() * 9) + 1);
+                crystal4 = Math.floor((Math.random() * 9) + 1);
+//Use Jquery to target the losses, wins, targetNumber, and userNumber ID's and insert the respective information based on variables
+                $("#targetNumber").html(targetNumber);
+                $("#userNumber").html(userNumber);  
+                $("#userWins").html(wins);
+                $("#userLosses").html(losses);
+                
+//add a value attribute to the individual crystal ID's and set them to the correct variables       
 
-        $(document).ready(function () {
+                $("#crystal1").attr("value", crystal1);
+                $("#crystal2").attr("value", crystal2);
+                $("#crystal3").attr("value", crystal3);
+                $("#crystal4").attr("value", crystal4);
+//Use jQuery to set an onclick event on any button pressed. set a new variable to target the value attribute and use a ParseInteger to make sure they are intergers.
+                $(".crystal").on("click", function() {
+                    console.log($(this).attr("value"));
+                    newNumber = parseInt($(this).attr("value"));
+                    userNumber += newNumber;
+                    console.log(userNumber);
+                    $("#userNumber").html(userNumber);
 
-            var game = {
-                gameState: 0,
-                wins: 0,
-                losses: 0,
-                targetNumber: 0,
-                userNumber: 0,
-                userLose: false,
-                userWin: false
-            }
-
-            // attmpt to push values into an array userNumber, use a parseint to convert to values and add them, display this number into YourNumber. Utilize a for loop to continue to add the new value to the old value
-
-            function initilaizeGame() {
-                crystals = {
-                    crystal1: Math.floor((Math.random() * 9) + 1),
-                    crystal2: Math.floor((Math.random() * 9) + 1),
-                    crytsal3: Math.floor((Math.random() * 9) + 1),
-                    crytsal4: Math.floor((Math.random() * 9) + 1),
-                    targetNumber: Math.floor((Math.random() * 100) + 40),
-                }
-
-
-            }
-            function populate(arr) {
-                $("#targetNumber").text(crystals.targetNumber);
-                $("#userWins").text(game.wins);
-                $("#userLosses").text(game.losses);
-            }
-            initilaizeGame();
-            populate();
-
-            $(".card").on("click", function () {
-                if (userNumber === targetNumber) {
-                    alert("You Win!");
-                    wins++;
-                    initilaizeGame();
-                }
-                else if (userNumber > targetNumber) {
-                    alert("You Lose");
-                    losses++;
-                    initilaizeGame();
-                }
-                else {
-                    for (var i = 0; i < targetNumber; i++) {
-                        
+                    if (userNumber === targetNumber) {
+                        alert("You Did It Morty!!!!!!")
+                        wins++;
+                        $("#userWins").html(wins);
+                        resetGame();
+                    } else if (userNumber > targetNumber) {
+                        alert("You Idiot Morty!!!!! You've Killed Us!!!")
+                        losses++;
+                        $("#userLosses").html(losses);
+                        resetGame();
                     }
-                }
-
-
-
-            });
-
-
-
-
+                });
+                
+            }
+            resetGame();
+            
         });
-
-
-
-
-
-
-
+            
 
 
     </script>

@@ -72,7 +72,7 @@
         <!--row-->
         <div class="row">
             <div class="col-4 targetnumber">
-                <div class="card text-white bg-info mb-3 fields">
+                <div class="card text-white bg-info mb-3">
                     <div class="card-header">Target Number</div>
                     <div class="card-body">
                         <p id="targetNumber" class="card-text"></p>
@@ -81,7 +81,7 @@
             </div>
             <!--End of targetNumber-->
             <div class="col-4 wincounter">
-                <div class="card text-white bg-info mb-3 fields">
+                <div class="card text-white bg-info mb-3">
                     <div class="card-header">Wins:</div>
                     <div class="card-body">
                         <p id="userWins" class="card-text"></p>
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="col-4 losscounter">
-                <div class="card text-white bg-info mb-3 fields">
+                <div class="card text-white bg-info mb-3">
                     <div class="card-header">Losses:</div>
                     <div class="card-body">
                         <p id="userLosses" class="card-text"></p>
@@ -100,9 +100,9 @@
         <!--End of row 2-->
         <div class="row">
             <div class="col-2">
-                <button>
-                    <div class="card bg-dark text-white crytal">
-                        <img class="card-img" src="assets\images\plumbus.jpeg" alt="A Plumbus height=" 149>
+                <button id="crystal1" class="crystal">
+                    <div class="card bg-dark text-white">
+                        <img class="card-img" src="assets\images\plumbus.jpeg" alt="A Plumbus" height="141">
                         <div class="card-img-overlay">
                             <h5 class="card-title">A Plumbus</h5>
                         </div>
@@ -110,8 +110,8 @@
                 </button>
             </div>
             <div class="col-2">
-                <button>
-                    <div class="card bg-dark text-white crytal">
+                <button id="crystal2" class="crystal">
+                    <div class="card bg-dark text-white">
                         <img class="card-img" src="assets\images\Szechuan.jpg" alt="Szechuan Sauce" height="141" width="200">
                         <div class="card-img-overlay">
                             <h5 class="card-title">Szechuan Sauce</h5>
@@ -120,18 +120,18 @@
                 </button>
             </div>
             <div class="col-2">
-                <button>
-                    <div class="card bg-dark text-white crytal">
+                <button id="crystal3" class="crystal">
+                    <div class="card bg-dark text-white">
                         <img class="card-img" src="assets\images\meeseeks.jpg" alt="Meeseeks Box" height="141" width="200">
                         <div class="card-img-overlay">
-                            <h5 class="card-title">Meeseeks Box</h5>
+                            <h5 id="crystal3" class="card-title">Meeseeks Box</h5>
                         </div>
                     </div>
                 </button>
             </div>
             <div class="col-2">
-                <button>
-                    <div class="card bg-dark text-white crytal">
+                <button id="crystal4" class="crystal">
+                    <div class="card bg-dark text-white">
                         <img class="card-img" src="assets\images\portal.jpg" alt="Portal" height="141" width="200">
                         <div class="card-img-overlay">
                             <h5 class="card-title">A Portal</h5>
@@ -143,7 +143,7 @@
         <!--End of Row 3-->
         <div class="row">
             <div class="col-4 scorecounter">
-                <div class="card text-white bg-info mb-3 fields">
+                <div class="card text-white bg-info mb-3">
                     <div class="card-header">Your Number</div>
                     <div class="card-body">
                         <p id="userNumber" class="card-text"></p>
@@ -167,7 +167,7 @@
 
     // Game with Four Crystals
 
-    //Every Crystal needs to have a random number 1-12
+    
 
     //Number should generate every time a user wins or loses
 
@@ -182,65 +182,175 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+            var wins = 0;
+            var losses = 0;
+            var userNumber = 0;
+            var targetNumber = Math.floor(Math.random() * 80) + 20; 
+            console.log(targetNumber);
 
-            var game = {
-                gameState: 0,
-                wins: 0,
-                losses: 0,
-                targetNumber: 0,
-                userNumber: [],
-                userLose: false,
-                userWin: false
-            }
-
-// attmpt to push values into an array userNumber, use a parseint to convert to values and add them, display this number into YourNumber. Utilize a for loop to continue to add the new value to the old value
-
-            function initilaizeGame() {
-                crystals = {
-                    crystal1: Math.floor((Math.random() * 9) + 1),
-                    crystal2: Math.floor((Math.random() * 9) + 1),
-                    crytsal3: Math.floor((Math.random() * 9) + 1),
-                    crytsal4: Math.floor((Math.random() * 9) + 1),
-                    targetNumber: Math.floor((Math.random() * 100) + 40),
-                }
+            function resetGame() {
+                userNumber = 0;
+                targetNumber = Math.floor(Math.random() * 80) + 20;
+                crystal1 = Math.floor((Math.random() * 9) + 1);
+                crystal2 = Math.floor((Math.random() * 9) + 1);
+                crystal3 = Math.floor((Math.random() * 9) + 1);
+                crystal4 = Math.floor((Math.random() * 9) + 1);
+                $("#targetNumber").html(targetNumber);
+                $("#userNumber").html(userNumber);  
+                $("#userWins").html(wins);
+                $("#userLosses").html(losses);
                 
-                userNumber 
+                
 
+                $("#crystal1").attr("value", crystal1);
+                $("#crystal2").attr("value", crystal2);
+                $("#crystal3").attr("value", crystal3);
+                $("#crystal4").attr("value", crystal4);
+
+                $(".crystal").on("click", function() {
+                    console.log($(this).attr("value"));
+                    newNumber = parseInt($(this).attr("value"));
+                    userNumber += newNumber;
+                    console.log(userNumber);
+                    $("#userNumber").html(userNumber);
+
+                    if (userNumber === targetNumber) {
+                        prompt("You Did It Morty!!!!!!")
+                        wins++;
+                        $("#userWins").html(wins);
+                        resetGame();
+                    } else if (userNumber > targetNumber) {
+                        prompt("You Idiot Morty!!!!! You've Killed Us!!!")
+                        losses++;
+                        $("#userLosses").html(losses);
+                        resetGame();
+                    }
+                });
+                
             }
-            function populate (arr) {
-                $("#targetNumber").text(crystals.targetNumber);
-                $("#userWins").text(game.wins);
-                $("#userLosses").text(game.losses);
-            }
-            initilaizeGame();
-            populate();
-
-            $(".card").on("click", function () {
-                if (userNumber === targetNumber) {
-                    alert("You Win!");
-                    wins++;
-                    initilaizeGame();    
-                }
-                else if (userNumber > targetNumber) {
-                    alert("You Lose");
-                    losses++;
-                    initilaizeGame();
-                }
-                else {
-
-                }
-
-
-
-            });
-
-
-
-
+            resetGame();
+            
         });
+        
+            // attmpt to push values into an array userNumber, use a parseint to convert to values and add them, display this number into YourNumber. Utilize a for loop to continue to add the new value to the old value
+
+        //     function resetGame() {
+        //         crystals = {
+        //             crystal1: Math.floor((Math.random() * 9) + 1),
+        //             crystal2: Math.floor((Math.random() * 9) + 1),
+        //             crytsal3: Math.floor((Math.random() * 9) + 1),
+        //             crytsal4: Math.floor((Math.random() * 9) + 1),
+        //             targetNumber: Math.floor((Math.random() * 100) + 40),
+
+        //         }
+
+
+        //     }
+        //     function populate(arr) {
+        //         $("#targetNumber").text(crystals.targetNumber);
+        //         $("#userWins").text(game.wins);
+        //         $("#userLosses").text(game.losses);
+        //         $('#userNumber').text(game.userNumber);
+        //     }
+        //     initilaizeGame();
+        //     populate();
+
+            
+
+        //     $(".card").on("click", function () {
+        //         if (userNumber < targetNumber) {
+        //             populate();
+        //            userNumber += crystals.crystal1;
+        //         }
+        //         else if (userNumber > targetNumber) {
+        //             alert("You Lose");
+        //             game.losses++;
+        //             initilaizeGame();
+        //             populate();
+        //         }
+        //         else { (userNumber === targetNumber)
+        //             alert("You Win!");
+        //             game.wins++;
+        //             initilaizeGame();
+        //             populate();
+        //         }
+                
+        //         console.log(userNumber);
+
+
+        //     });
 
 
 
+
+        // });
+
+
+
+// $("document").ready(function () {
+//     var wins = 0;
+//     var losses = 0;
+//     var totalScore = 0;
+//     var villainHighNumber = Math.floor(Math.random() * 120) + 19;
+
+//     function reset() {
+//         totalScore = 0;
+//         villainHighNumber = Math.floor(Math.random() * 120) + 19;
+//         titan1 = Math.floor(Math.random() * 12) + 1;
+//         titan2 = Math.floor(Math.random() * 12) + 1;
+//         titan3 = Math.floor(Math.random() * 12) + 1;
+//         titan4 = Math.floor(Math.random() * 12) + 1;
+//         titan5 = Math.floor(Math.random() * 12) + 1;
+//         $("#villain-random-text").html(villainHighNumber)
+//         $("#total-score-text").html(totalScore)
+//         $("#titan-1").attr("value", titan1)
+//         $("#titan-2").attr("value", titan2)
+//         $("#titan-3").attr("value", titan3)
+//         $("#titan-4").attr("value", titan4)
+//         $("#titan-5").attr("value", titan5)
+//     }
+
+//     function start() {
+//         totalScore = 0;
+//         villainHighNumber = Math.floor(Math.random() * 120) + 19;
+//         titan1 = Math.floor(Math.random() * 12) + 1;
+//         titan2 = Math.floor(Math.random() * 12) + 1;
+//         titan3 = Math.floor(Math.random() * 12) + 1;
+//         titan4 = Math.floor(Math.random() * 12) + 1;
+//         titan5 = Math.floor(Math.random() * 12) + 1;
+//         $("#villain-random-text").html(villainHighNumber);
+//         $("#total-score-text").html(totalScore)
+
+//         // adds value attribute with a random number to each titan
+//         $("#titan-1").attr("value", titan1)
+//         $("#titan-2").attr("value", titan2)
+//         $("#titan-3").attr("value", titan3)
+//         $("#titan-4").attr("value", titan4)
+//         $("#titan-5").attr("value", titan5)
+
+//         // when titan is clicked on it saves value to titan and then adds to totalScore
+//         $(".titan").on("click", function () {
+//             console.log($(this).attr("value"));
+//             savedNumber = parseInt($(this).attr("value"));
+//             totalScore += savedNumber;
+//             console.log(totalScore);
+//             $("#total-score-text").html(totalScore);
+
+
+//             // logic for wins and losses
+//             if (totalScore === villainHighNumber) {
+//                 wins++;
+//                 $("#wins-text").html(wins);
+//                 reset();
+//             } else if (totalScore > villainHighNumber) {
+//                 losses++;
+//                 $("#losses-text").html(losses);
+//                 reset();
+//             }
+//         });
+//     }
+//     start();
+// });
 
 
 
